@@ -1,13 +1,14 @@
 module CLI
-  ( Command(..),
-    GenerateIp(..),
-    appParser
+  ( Command (..),
+    GenerateIp (..),
+    appParser,
   )
 where
 
 import Options.Applicative
   ( Parser,
     auto,
+    execParser,
     fullDesc,
     header,
     help,
@@ -17,25 +18,26 @@ import Options.Applicative
     option,
     progDesc,
     strOption,
-    execParser
   )
 
 data Command = Generate GenerateIp
-  deriving Show
+  deriving (Show)
 
 data GenerateIp = GenerateIp
   { filepath :: Maybe FilePath,
     count :: Int
-  } deriving Show
+  }
+  deriving (Show)
 
 appParser :: IO Command
-appParser = execParser $
-  info
-    (commandParser <**> helper)
-    ( fullDesc
-        <> progDesc "generate IPs"
-        <> header "Generate IPv4"
-    )
+appParser =
+  execParser $
+    info
+      (commandParser <**> helper)
+      ( fullDesc
+          <> progDesc "generate IPs"
+          <> header "Generate IPv4"
+      )
 
 commandParser :: Parser Command
 commandParser = Generate <$> generateIpParser
