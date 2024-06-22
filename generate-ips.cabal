@@ -68,9 +68,12 @@ library
   build-depends:
     , base
     , optparse-applicative
+    , random
     , relude
 
-  exposed-modules:  CLI
+  exposed-modules:
+    CLI
+    GenerateIP
 
 executable generate-ips
   -- Import common warning flags.
@@ -88,8 +91,8 @@ executable generate-ips
   -- Other library packages from which modules are imported.
   build-depends:
     , base
-    , relude
     , generate-ips
+    , relude
 
   -- Directories containing source files.
   hs-source-dirs:   app
