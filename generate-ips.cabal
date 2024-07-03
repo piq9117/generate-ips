@@ -72,12 +72,14 @@ library
     , optparse-applicative
     , random
     , relude
+    , resourcet
     , stm
     , stm-conduit
 
   exposed-modules:
     CLI
     GenerateIP
+    Handler
 
 executable generate-ips
   -- Import common warning flags.
