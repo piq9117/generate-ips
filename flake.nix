@@ -19,7 +19,16 @@
         init-project = final.writeScriptBin "init-project" ''
           ${final.hsPkgs.cabal-install}/bin/cabal init --non-interactive
         '';
+        generate-ips = final.haskellPackages.callPackage ./. { };
       };
+
+      packages = forAllSystems (system:
+        let
+          pkgs = nixpkgsFor.${system};
+        in
+        {
+          default = pkgs.generate-ips;
+        });
 
       devShells = forAllSystems (system:
         let
@@ -35,6 +44,7 @@
               hsPkgs.cabal-install
               hsPkgs.cabal-fmt
               hsPkgs.ghc
+              cabal2nix
               ormolu
               treefmt
               nixpkgs-fmt
