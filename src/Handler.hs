@@ -17,8 +17,7 @@ import GenerateIP (drainQueue, fillQueue)
 handler :: TBQueue Text -> Command -> IO ()
 handler queue command@(Generate input) =
   concurrently_
-    (fillQueue queue input.count)
-    ( replicateConcurrently_ 8 $
-        withRunInIO $ \runInIO ->
-          runInIO $ drainQueue queue command `catch` (\(_e :: BlockedIndefinitelyOnSTM) -> pure ())
+    (replicateConcurrently_ input.count $ fillQueue queue)
+    ( withRunInIO $ \runInIO ->
+        runInIO $ drainQueue queue command `catch` (\(_e :: BlockedIndefinitelyOnSTM) -> pure ())
     )

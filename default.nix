@@ -1,5 +1,14 @@
-{ mkDerivation, async, base, conduit, lib, optparse-applicative
-, random, relude, resourcet, stm, stm-conduit
+{ mkDerivation
+, async
+, base
+, conduit
+, lib
+, optparse-applicative
+, random
+, relude
+, resourcet
+, stm
+, stm-conduit
 }:
 mkDerivation {
   pname = "generate-ips";
@@ -8,7 +17,14 @@ mkDerivation {
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
-    async base conduit optparse-applicative random relude resourcet stm
+    async
+    base
+    conduit
+    optparse-applicative
+    random
+    relude
+    resourcet
+    stm
     stm-conduit
   ];
   executableHaskellDepends = [ base relude ];

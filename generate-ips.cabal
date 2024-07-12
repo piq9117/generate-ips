@@ -50,7 +50,7 @@ extra-doc-files: CHANGELOG.md
 
 common shared
   ghc-options:
-    -ddump-minimal-imports -Wall -Werror -Wcompat -Wno-name-shadowing
+    -ddump-minimal-imports -Wall -Wcompat -Wno-name-shadowing -Werror
     -Wno-type-equality-out-of-scope
 
   mixins:

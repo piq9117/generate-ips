@@ -30,11 +30,10 @@ import Prelude hiding (stdout)
 newBuffer :: Natural -> IO (TBQueue Text)
 newBuffer size = newTBQueueIO size
 
-fillQueue :: (MonadIO m) => TBQueue Text -> Int -> m ()
-fillQueue queue count = do
-  replicateM_ count $ do
-    ipv4 <- generateIpV4
-    atomically $ (writeTBQueue queue ipv4)
+fillQueue :: (MonadIO m) => TBQueue Text -> m ()
+fillQueue queue = do
+  ipv4 <- generateIpV4
+  atomically $ (writeTBQueue queue ipv4)
 
 drainQueue :: (MonadIO m, MonadUnliftIO m) => TBQueue Text -> Command -> m ()
 drainQueue queue (Generate input) = runConduitRes $
